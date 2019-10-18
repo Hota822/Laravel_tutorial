@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="newproject" basedir="." default="build">
+  <property name="outputDir" value="phing_test/result/" override="false"/>
+  <property name="targetDir" value="." override="false"/>
+  <target name="phpcpd">
+    <phpcpd minTokens="10">
+      <fileset dir="${targetDir}">
+	<include name="**/**/*.php"/>
+	<exclude name="vendor/" />
+      </fileset>
+      <formatter type="pmd"
+		 outfile="${outputDir}cpd.xml"/>
+    </phpcpd>
+  </target>
+
+  <target name="phpmd">
+    <phpmd rulesets="phpmd.xml">
+      <fileset dir="${targetDir}">
+	<exclude name="vendor/"/>
+      </fileset>
+      <formatter type="xml"
+		 outfile="${outputDir}pmd.xml"/>
+    </phpmd>
+  </target>
+
+
+  <target name="phpcs" description="Generate phpcs.xml using PHP_CodeSniffer">
+    <phpcodesniffer standard="PSR2" allowedFileExtensions="php" >
+      <fileset dir = "${targetDir}">
+	<exclude name = "vendor/"/>
+      </fileset>
+          <formatter type="checkstyle"
+            outfile="${outputDir}checkstyle-result.xml"/>
+    </phpcodesniffer>
+  </target>
+
+  <!-- <target name="phpunit"> -->
+  <!--   <mkdir dir="${outputDir}/coverage" /> -->
+  <!--   <exec command="phpunit -c tests/etc/phpunit_config.xml" logoutput="true" /> -->
+  <!--         <formatter type="checkstyle" -->
+  <!-- 		 outfile="${outputDir}phpcs.xml"/> -->
+  <!-- </target> -->
+
+  <target name="build" depends="phpcpd,phpmd, phpcs">
+  
+
+  </target>
+</project>
