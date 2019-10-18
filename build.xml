@@ -10,6 +10,7 @@
 	<exclude name="${outputDir}"/>
 	<exclude name="public/"/>
 	<exclude name="database/"/>
+	<exclude name="**/database.php"/>	
       </fileset>
       <formatter type="pmd"
 		 outfile="${outputDir}cpd.xml"/>
