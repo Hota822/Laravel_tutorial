@@ -9,7 +9,7 @@
 	<exclude name="vendor/" />
 	<exclude name="${outputDir}"/>
 	<exclude name="public/"/>
-	<exclude name="database.php"/>
+	<exclude name="database/"/>
       </fileset>
       <formatter type="pmd"
 		 outfile="${outputDir}cpd.xml"/>
@@ -36,7 +36,8 @@
 	<include name="**/*.php"/>
 	<exclude name = "vendor/"/>
 	<exclude name="${outputDir}"/>
-	<exclude name="public/"/>	
+	<exclude name="public/"/>
+	<exclude name="database/"/>	
       </fileset>
           <formatter type="checkstyle"
             outfile="${outputDir}checkstyle-result.xml"/>
