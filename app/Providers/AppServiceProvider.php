@@ -4,11 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-public function boot()
-{
-    Schema::defaultStringLentgh(191);
-}
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,3 +26,14 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 }
+
+
+use Illuminate\Support\Facades\Schema;
+
+public function boot()
+{
+    Schema::defaultStringLentgh(191);
+}
+
+
+
