@@ -7,6 +7,8 @@
       <fileset dir="${targetDir}">
 	<include name="**/**/*.php"/>
 	<exclude name="vendor/" />
+	<exclude name="${outputDir}"/>
+	<exclude name="public/"/>
       </fileset>
       <formatter type="pmd"
 		 outfile="${outputDir}cpd.xml"/>
@@ -17,6 +19,9 @@
     <phpmd rulesets="phpmd.xml">
       <fileset dir="${targetDir}">
 	<exclude name="vendor/"/>
+	<exclude name="${outputDir}"/>
+	<exclude name="public/"/>
+	<exclude name="database"/>
       </fileset>
       <formatter type="xml"
 		 outfile="${outputDir}pmd.xml"/>
@@ -25,9 +30,11 @@
 
 
   <target name="phpcs" description="Generate phpcs.xml using PHP_CodeSniffer">
-    <phpcodesniffer standard="PSR2" allowedFileExtensions="php" >
+    <phpcodesniffer standard="PSR2" allowedFileExtensions="php, inc" >
       <fileset dir = "${targetDir}">
 	<exclude name = "vendor/"/>
+	<exclude name="${outputDir}"/>
+	<exclude name="public/"/>	
       </fileset>
           <formatter type="checkstyle"
             outfile="${outputDir}checkstyle-result.xml"/>
