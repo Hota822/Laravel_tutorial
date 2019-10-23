@@ -11,7 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('static_pages/hello_world');
-});
+// Route::get('/', function ()
+// {
+//     return view('static_pages/hello_world');
+// });
+
+$di = 'static_pages';
+$to = $di . '/home';
+
+Route::view("/","{$to}");
+
+$to = $di . '/help';
+Route::view("/{$to}","{$to}");
+
+$to = $di . '/about';
+Route::view("/{$to}","{$to}");
+
+$to = $di . '/contact';
+Route::view("/{$to}","{$to}");
 
