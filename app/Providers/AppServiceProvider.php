@@ -14,9 +14,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        //
     }
-
     /**
      * Bootstrap any application services.
      *
@@ -27,5 +26,3 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
     }
 }
-
-

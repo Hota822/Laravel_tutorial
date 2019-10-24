@@ -19,14 +19,13 @@
 $di = 'static_pages';
 $to = $di . '/home';
 
-Route::view("/","{$to}");
+Route::view("/", "{$to}");
 
 $to = $di . '/help';
-Route::view("/{$to}","{$to}");
+Route::view("/{$to}", "{$to}");
 
 $to = $di . '/about';
-Route::view("/{$to}","{$to}");
+Route::view("/{$to}", "{$to}");
 
 $to = $di . '/contact';
-Route::view("/{$to}","{$to}");
-
+Route::view("/{$to}", "{$to}");

@@ -7,12 +7,9 @@ class Helper
     public static function fullTitle($pageTitle)
     {
         $baseTitle = 'Ruby on Rails Tutorial Sample App';
-        if ( empty($pageTitle)) {
+        if (empty($pageTitle)) {
             return $baseTitle;
-        } else {
-            return $pageTitle.' | '.$baseTitle;
         }
+        return $pageTitle.' | '.$baseTitle;
     }
-                     
 }
-

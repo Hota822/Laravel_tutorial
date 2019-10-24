@@ -38,7 +38,8 @@
 	<exclude name = "vendor/"/>
 	<exclude name="${outputDir}"/>
 	<exclude name="public/"/>
-	<exclude name="database/"/>	
+	<exclude name="database/"/>
+	<exclude name="resources/views/"/>
       </fileset>
           <formatter type="checkstyle"
             outfile="${outputDir}checkstyle-result.xml"/>

@@ -13,7 +13,7 @@ class AllPagesResponseTest extends TestCase
      *
      * @return void
      */
-    const to = 'static_pages';
+    const TO = 'static_pages';
 
     protected $baseTitle = '';
     protected function setUp(): void
@@ -32,15 +32,15 @@ class AllPagesResponseTest extends TestCase
         $response->assertStatus(200);
         //$response->assertSee('Home | ' . $this->baseTitle);
 
-        $response = $this->get(self::to . "/help");
+        $response = $this->get(self::TO . "/help");
         $response->assertStatus(200);
         //$response->assertSee('help | ' . $this->baseTitle);
 
-        $response = $this->get(self::to . "/about");
+        $response = $this->get(self::TO . "/about");
         $response->assertStatus(200);
         //$response->assertSee('about | ' . $this->baseTitle);
 
-        $response = $this->get(self::to . "/contact");
+        $response = $this->get(self::TO . "/contact");
         $response->assertStatus(200);
     }
 }
