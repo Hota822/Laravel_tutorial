@@ -7,10 +7,10 @@ class Exam
     public $name;
     public $email;
 
-    public function __construct($n, $m)
+    public function __construct($na, $em)
     {
-        $this->name = $n;
-        $this->email = $m;
+        $this->name = $na;
+        $this->email = $em;
     }
 
     public function fromattedEmail()

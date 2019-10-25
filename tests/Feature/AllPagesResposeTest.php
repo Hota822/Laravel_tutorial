@@ -24,7 +24,7 @@ class AllPagesResponseTest extends TestCase
     {
         // echo "\n=================\n";
         // echo "in testAccess()\n" . var_dump($this);
-        // echo "\n=================\n";        
+        // echo "\n=================\n";
 
         $response = $this->get('/');
         $response->assertStatus(200)

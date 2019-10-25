@@ -18,6 +18,5 @@ class HelperTest extends TestCase
     {
         $title = 'Home | Ruby on Rails Tutorial Sample App';
         self::assertEquals($title, Helper::fullTitle('Home'));
-
     }
 }

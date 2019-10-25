@@ -29,7 +29,6 @@ class StaticPagesTest extends DuskTestCase
             $browser->visit('/')
                     ->assertTitleContains('Home | ' . $this->baseTitle)
                     ->assertSee('Sample App');
-            
         });
     }
 
