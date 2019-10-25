@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <project name="newproject" basedir="." default="build">
-  <property name="outputDir" value="phing_test/result/" override="false"/>
+  <property name="outputDir" value="tests/Phing/result/" override="false"/>
   <property name="targetDir" value="." override="false"/>
   <target name="phpcpd">
     <phpcpd minTokens="10">

@@ -13,8 +13,6 @@ class AllPagesResponseTest extends TestCase
      *
      * @return void
      */
-    const TO = 'static_pages';
-
     protected $baseTitle = '';
     protected function setUp(): void
     {
@@ -29,18 +27,23 @@ class AllPagesResponseTest extends TestCase
         // echo "\n=================\n";        
 
         $response = $this->get('/');
-        $response->assertStatus(200);
+        $response->assertStatus(200)
+                 ->assertViewIs('static_pages.home');
         //$response->assertSee('Home | ' . $this->baseTitle);
 
-        $response = $this->get(self::TO . "/help");
-        $response->assertStatus(200);
-        //$response->assertSee('help | ' . $this->baseTitle);
+        ///$response = $this->get(self::TO . "/help");
+        $response = $this->get(url('help'));
+        $response->assertStatus(200)
+                 ->assertViewIs('static_pages.help');
 
-        $response = $this->get(self::TO . "/about");
-        $response->assertStatus(200);
-        //$response->assertSee('about | ' . $this->baseTitle);
 
-        $response = $this->get(self::TO . "/contact");
-        $response->assertStatus(200);
+        $response = $this->get(url('about'));
+        $response->assertStatus(200)
+                 ->assertViewIs('static_pages.about');
+
+
+        $response = $this->get(url('contact'));
+        $response->assertStatus(200)
+                 ->assertViewIs('static_pages.contact');
     }
 }

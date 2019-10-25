@@ -29,13 +29,14 @@ class StaticPagesTest extends DuskTestCase
             $browser->visit('/')
                     ->assertTitleContains('Home | ' . $this->baseTitle)
                     ->assertSee('Sample App');
+            
         });
     }
 
     public function testAccessHelp()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/static_pages/help')
+            $browser->visit('/help')
                     ->assertTitleContains('Help | ' . $this->baseTitle);
         });
     }
@@ -43,7 +44,7 @@ class StaticPagesTest extends DuskTestCase
     public function testAccessAbout()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/static_pages/about')
+            $browser->visit('/about')
                     ->assertTitleContains('About | ' . $this->baseTitle);
         });
     }
@@ -51,7 +52,7 @@ class StaticPagesTest extends DuskTestCase
     public function testAccessContact()
     {
         $this->browse(function (Browser $browser) {
-            $browser->visit('/static_pages/contact')
+            $browser->visit('/contact')
                     ->assertTitleContains('Contact | ' . $this->baseTitle);
         });
     }

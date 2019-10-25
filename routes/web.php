@@ -11,21 +11,28 @@
 |
 */
 
-// Route::get('/', function ()
+// Route::get('/', function
 // {
 //     return view('static_pages/hello_world');
 // });
 
 $di = 'static_pages';
-$to = $di . '/home';
 
-Route::view("/", "{$to}");
+// for static pages
 
-$to = $di . '/help';
-Route::view("/{$to}", "{$to}");
+$to = '/home';
 
-$to = $di . '/about';
-Route::view("/{$to}", "{$to}");
+Route::view("/", "{$di}{$to}");
 
-$to = $di . '/contact';
-Route::view("/{$to}", "{$to}");
+$to = '/help';
+Route::view("{$to}", "{$di}{$to}");
+
+$to = '/about';
+Route::view("{$to}", "{$di}{$to}");
+
+$to = '/contact';
+Route::view("{$to}", "{$di}{$to}");
+
+// for Users controller
+Route::get('users/new', 'UsersController@new')
+    ->name('signup');
