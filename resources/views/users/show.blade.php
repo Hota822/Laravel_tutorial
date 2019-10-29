@@ -11,7 +11,9 @@ $title = $user->name;
 	    <section class="user_info">
 		<h1>
 		    {{ Helper::gravatar_for($user) }}
-		    {{ $user->name }}
+		    Name: {{ $user->name }}<br>
+		    Email: {{ $user->email }}<br>
+		    ID: {{ $user->id }}
 		</h1>
 	    </section>
 	</aside>

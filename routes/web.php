@@ -33,10 +33,14 @@ Route::view("{$to}", "{$di}{$to}");
 $to = '/contact';
 Route::view("{$to}", "{$di}{$to}");
 
-// for Users controller
-Route::get('users/{user}', 'UsersController@show');
-//  ->name('signup');
-
 Auth::routes();
+
+// for Users controller
+//Route::get('users/{user}', 'UsersController@show');
+//  ->name('signup');
+Route::resource('users', 'UsersController')
+    ->except(['create', 'store']);
+
+
 //illuminate/routing/router
 

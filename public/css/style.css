@@ -158,3 +158,22 @@ input {
   height: auto !important;
 }
 
+.checkbox {
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.checkbox span {
+  margin-left: 20px;
+  font-weight: normal;
+}
+
+.inline_block {
+  display: inline-block;
+}
+
+#session_remember_me {
+  width: auto;
+  margin-left: 0;
+}
+

@@ -15,8 +15,8 @@
 			    Account <b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
-			    <li><a href="{{ url('users/show') }}">Profile</a></li>
-			    <li><a href="{{ url('users/{user}/edit') }}">Setting</a></li>
+			    <li>{{ link_to(route('users.show', ['user' => $id]), 'Profile') }}</li>
+			    <li>{{ link_to(route('users.edit', ['user' => $id]), 'Setting') }}</li>
 			    <li>
 				<a class="dropdown-item" href="{{ route('logout') }}"
 				   onclick="event.preventDefault();
