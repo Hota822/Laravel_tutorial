@@ -15,7 +15,7 @@ $title = 'Home';
 	    sample application.
 	</h2>
 
-	{{ link_to(route('signup'), 'Sign up now!', [ 'class' => "btn btn-lg btn-primary"] ) }}
+	{{ link_to(route('register'), 'Sign up now!', [ 'class' => "btn btn-lg btn-primary"]) }}
     </div>
 
     {!! link_to('http://rubyonrails.org/', HTML::image('rails.png'),$escape=false) !!}

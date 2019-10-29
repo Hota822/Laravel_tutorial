@@ -34,5 +34,9 @@ $to = '/contact';
 Route::view("{$to}", "{$di}{$to}");
 
 // for Users controller
-Route::get('users/new', 'UsersController@new')
-    ->name('signup');
+Route::get('users/{user}', 'UsersController@show');
+//  ->name('signup');
+
+Auth::routes();
+//illuminate/routing/router
+

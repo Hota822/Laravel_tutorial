@@ -15,7 +15,7 @@ class UsersControllerTest extends TestCase
      */
     public function testUserController()
     {
-        $response = $this->get(route('signup'));
+        $response = $this->get(route('register'));
 
         $response->assertStatus(200);
     }
