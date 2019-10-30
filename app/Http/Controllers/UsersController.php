@@ -14,7 +14,9 @@ class UsersController extends Controller
      */
     public function index()
     {
-        //
+        //same as belog sentence: $users = \DB::table('users')->paginate(5);
+        $users = User::paginate(5);
+        return view('users/index', ['users' => $users]);
     }
 
     /**
@@ -46,7 +48,9 @@ class UsersController extends Controller
      */
     public function show($id)
     {
-        return view('users/show');
+        $user = User::find($id);
+        return view('users/show', ['user' => $user]);
+
     }
 
     /**
@@ -57,6 +61,7 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
+        dump($id);
         return view('users/edit');
     }
 
@@ -65,11 +70,15 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\User  $user
+     * @param  \Int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request,User $user_param, $user)
     {
         //dd($request->route()->parameter('user'));
+        dump($user);
+        dump($user_param);
+        dd($request);
         $user_id = $request->route()->parameter('user');
         $user->name = $request->name;
         $user->email = $request->email;
@@ -77,7 +86,7 @@ class UsersController extends Controller
         return redirect()->action('UsersController@show',
         ['user' => $user_id])
                          ->withInput()
-                         ->with('successfly updated');
+                         ->with('success', 'successfly updated');
     }
 
     /**
@@ -88,6 +97,11 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        
+        $user->delete();
+
+        return redirect('users')
+            ->withInput()
+            ->with('success', 'user was successfly deleted');
     }
 }

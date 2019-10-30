@@ -1,7 +1,9 @@
 @extends('layouts.application')
 
 @php
-$user = Auth::user();
+if (is_null($user)) {
+    $user = Auth::user();
+}
 $title = $user->name;
 @endphp
 

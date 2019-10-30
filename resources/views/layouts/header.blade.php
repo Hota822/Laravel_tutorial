@@ -15,7 +15,7 @@
 			    Account <b class="caret"></b>
 			</a>
 			<ul class="dropdown-menu">
-			    <li><a href="{{ url('users/show') }}">Profile</a></li>
+			    <li><a href="{{ url('users/{user}') }}">Profile</a></li>
 			    <li><a href="{{ url('users/{user}/edit') }}">Setting</a></li>
 			    <li>
 				<a class="dropdown-item" href="{{ route('logout') }}"
