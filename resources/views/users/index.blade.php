@@ -9,8 +9,12 @@ $title = 'All users';
 	@foreach($users as $user)
 	    <li>
 		{{ Helper::gravatar_for($user) }}
-		{{ link_to("users/{$user->id}", $user->name) }}
-		<form action="{{ url("users/{$user->id}") }}" method="POST" >
+		<div class="inline_block">
+		    Id: {{ $user->id }}<br>
+		    Name: {{ link_to("users/{$user->id}", $user->name) }}</br>
+		    Email: {{ $user->email }}<br>
+		</div>
+		<form action="{{ url("users/{$user->id}") }}" method="POST" class="inline_block" >
 		    @method('DELETE')
 		    @csrf
 		    <button type="submit" class="btn btn-primary">

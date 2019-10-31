@@ -33,6 +33,7 @@ Route::view("{$to}", "{$di}{$to}");
 $to = '/contact';
 Route::view("{$to}", "{$di}{$to}");
 
+// for signup, login, logout, password_reset
 Auth::routes();
 
 // for Users controller
@@ -40,6 +41,8 @@ Auth::routes();
 //  ->name('signup');
 Route::resource('users', 'UsersController')
     ->except(['create', 'store']);
+
+Route::post('activation', 'AccountActivationController@activate');
 
 
 //illuminate/routing/router

@@ -61,7 +61,6 @@ class UsersController extends Controller
      */
     public function edit($id)
     {
-        dump($id);
         return view('users/edit');
     }
 
@@ -76,9 +75,6 @@ class UsersController extends Controller
     public function update(Request $request,User $user_param, $user)
     {
         //dd($request->route()->parameter('user'));
-        dump($user);
-        dump($user_param);
-        dd($request);
         $user_id = $request->route()->parameter('user');
         $user->name = $request->name;
         $user->email = $request->email;

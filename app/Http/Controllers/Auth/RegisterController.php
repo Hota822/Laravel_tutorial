@@ -7,7 +7,8 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-
+use App\Mail\ActivationCreated;
+    
 class RegisterController extends Controller
 {
     /*
@@ -29,6 +30,8 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/users/{user}';
+
+    protected $user;
 
     /**
      * Create a new controller instance.
@@ -65,10 +68,15 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         session()->flash('success', 'Welcome to the Sample App!');
-        return User::create([
+        
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'activation_digest' => base64_encode($data['email'])
         ]);
+
+        \Mail::to($user->email)->send(new ActivationCreated($user));
+        return $user;
     }
 }
