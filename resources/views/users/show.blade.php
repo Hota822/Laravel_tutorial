@@ -19,5 +19,25 @@ $title = $user->name;
 		</h1>
 	    </section>
 	</aside>
+	<div class="col-md-8">
+	    <h3>Microposts ( {{ $microposts->count() }}</h3>
+	    <ol class="microposts">
+		@php
+
+		@endphp
+		@foreach($microposts as $micropost)
+		    <li id="micropost-{{ $micropost->id }}">
+			    {{ Helper::gravatar_for($micropost->user) }}
+ 			<span class="user">{{ $micropost->user->name }}</span>
+			<span class="content">{{ $micropost->content }}</span>
+			<span class="timestamp">
+			    Posted at {{ $micropost->created_at }}
+			</span>
+		    </li>
+		    <hr>
+		@endforeach
+	    </ol>
+	    {{ $microposts->links() }}
+	</div>
     </div>
 @endsection

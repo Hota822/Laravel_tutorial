@@ -11,5 +11,5 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/custom.js', 'public/js', 'vendor/barryvdh/laravel-debugbar/src/Resources/sqlqueries/widget.js')
-    .sass('resources/sass/style.scss', 'public/css', 'vendor/barryvdh/laravel-debugbar/src/Resources/laravel-debugbar.css');
+mix.js('resources/js/app.js', 'public/js')
+   .sass('resources/sass/app.scss', 'public/css');

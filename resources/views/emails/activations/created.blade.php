@@ -1,9 +1,9 @@
 @component('mail::message')
 # Introduction
 
-The body of your message.
+account activation
 
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => 'links'])
 Button Text
 @endcomponent
 

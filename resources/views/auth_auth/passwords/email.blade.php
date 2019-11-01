@@ -1,8 +1,4 @@
-@php
-$title = 'reset password'
-@endphp
-
-@extends('layouts.application')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">

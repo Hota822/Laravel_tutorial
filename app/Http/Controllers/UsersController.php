@@ -49,7 +49,8 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        return view('users/show', ['user' => $user]);
+        $microposts = $user->microposts()->paginate(10);
+        return view('users/show', ['user' => $user, 'microposts' => $microposts]);
 
     }
 
@@ -74,7 +75,6 @@ class UsersController extends Controller
      */
     public function update(Request $request,User $user_param, $user)
     {
-        //dd($request->route()->parameter('user'));
         $user_id = $request->route()->parameter('user');
         $user->name = $request->name;
         $user->email = $request->email;
@@ -96,6 +96,7 @@ class UsersController extends Controller
         
         $user->delete();
 
+        // if delete myself, redirect to login page
         return redirect('users')
             ->withInput()
             ->with('success', 'user was successfly deleted');

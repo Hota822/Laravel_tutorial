@@ -34,16 +34,21 @@ $to = '/contact';
 Route::view("{$to}", "{$di}{$to}");
 
 // for signup, login, logout, password_reset
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 // for Users controller
 //Route::get('users/{user}', 'UsersController@show');
 //  ->name('signup');
 Route::resource('users', 'UsersController')
-    ->except(['create', 'store']);
+    ->except(['create', 'store'])
+    ->middleware('verified');
 
-Route::post('activation', 'AccountActivationController@activate');
+Route::resource('microposts', 'MicropostsController')
+    ->only(['store', 'destroy'])
+    ->middleware('verified');
 
 
-//illuminate/routing/router
+
+
+
 

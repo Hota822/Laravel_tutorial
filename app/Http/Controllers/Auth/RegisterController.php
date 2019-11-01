@@ -76,7 +76,7 @@ class RegisterController extends Controller
             'activation_digest' => base64_encode($data['email'])
         ]);
 
-        \Mail::to($user->email)->send(new ActivationCreated($user));
+        //\Mail::to($user->email)->send(new ActivationCreated($user));
         return $user;
     }
 }

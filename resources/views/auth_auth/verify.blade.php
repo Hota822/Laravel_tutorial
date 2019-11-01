@@ -1,8 +1,4 @@
-@php
-$title = 'email verification'
-@endphp
-
-@extends('layouts.application')
+@extends('layouts.app')
 
 @section('content')
 <div class="container">
