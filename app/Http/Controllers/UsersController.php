@@ -101,4 +101,18 @@ class UsersController extends Controller
             ->withInput()
             ->with('success', 'user was successfly deleted');
     }
+
+    public function followers(User $user, $id )
+    {
+        $title = 'Followers';
+        $users = $user->followers()->paginate(5);
+        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $id]);
+    }
+
+    public function following(User $user, $id)
+    {
+        $title = 'Following';
+        $users = $user->following()->paginate(5);
+        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $id]);        
+    }
 }

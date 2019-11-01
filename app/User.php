@@ -50,4 +50,35 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasMany('App\Micropost')
                     ->orderBy('updated_at', 'desc');
     }
+
+    public function followers()
+    {
+        return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
+    }
+
+    public function following()
+    {
+        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');
+    }
+
+    public function alreadyFollowed($other_user)
+    {
+        return !empty($this->followers->where('id', $other_user->id)->count());
+    }
+
+    public function follow($other_user)
+    {
+        \DB::table('relationships')->insert([
+            'follower_id' => $this->id,
+            'followed_id' => $other_user->id,
+        ]);
+    }
+
+    public function unfollow($other_user)
+    {
+        \DB::table('relationships')->where([
+            ['follower_id' , $this->id],
+            ['followed_id' , $other_user->id],
+        ])->delete();
+    }
 }

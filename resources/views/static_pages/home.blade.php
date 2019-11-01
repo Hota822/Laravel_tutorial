@@ -19,6 +19,23 @@ $user = Auth::user();
 		<span>view my profile</span>
 		<span>Microposts ( {{ $user->microposts->count() }} )</span>		
 	    </section>
+	    <section class="stats">
+		<div class="stats">
+		    
+		    <a href="{{ url("users/{$user->id}/following") }}">
+			<strong id="following" class="stat">
+			{{ $user->following->count() }}
+			</strong>
+			following
+		    </a>
+		    <a href="{{ url("users/{$user->id}/followers") }}">
+		        <strong id="followers" class="stat">
+			    {{ $user->followers->count() }}
+			</strong>
+			followers
+		    </a>
+		</div>
+	    </section>
 	    <section class="micropost_form">
 		<form method="POST" action="{{ route('microposts.store') }}">
 		    @csrf
@@ -37,12 +54,13 @@ $user = Auth::user();
 
 		@foreach($microposts as $micropost)
 		    <li id="micropost-{{ $micropost->id }}">
-			    {{ Helper::gravatar_for($micropost->user) }}
+			    {{ Helper::gravatar_for($micropost->user, 50) }}
  			<span class="user">{{ $micropost->user->name }}</span>
 			<span class="content">{{ $micropost->content }}</span>
 			<span class="timestamp">
 			    Posted at {{ $micropost->created_at }}
 			</span>
+			<div> 
 			<form action="{{ url("microposts/{$micropost->id}") }}" method="POST" class="inline_block" >
 			    @method('DELETE')
 			    @csrf
@@ -50,8 +68,8 @@ $user = Auth::user();
 				delete
 			    </button>
 			</form>
+			</div>
 		    </li>
-		    <hr>
 		@endforeach
 	    </ol>
 	    

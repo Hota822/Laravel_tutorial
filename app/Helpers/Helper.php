@@ -14,10 +14,11 @@ class Helper
         return $pageTitle.' | '.$baseTitle;
     }
 
-    public static function gravatar_for($user)
+    public static function gravatar_for($user, $size = 80)
     {
         $gravatar_id = $user->email;
-        $gravatar_url = "https://secure.gravatar.com/avatar/{$gravatar_id}";
+        $gravatar_url = "https://secure.gravatar.com/avatar/{$gravatar_id}?s={$size}";
         return \HTML::image($gravatar_url, $user->name, ['class' => 'gravatar']);
+        
     }
 }

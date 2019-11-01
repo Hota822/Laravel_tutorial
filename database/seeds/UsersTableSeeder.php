@@ -14,6 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         App\User::truncate();
+        DB::table('relationship')->delete();
         DB::table('users')->insert([
                 'name' =>  'adminuser',
                 'email' => 'admin@example.com',
@@ -22,8 +23,10 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'activation_digest' => 'aaa',
                 'email_verified_at' => Carbon::now(),
-        ]);                
+        ]);
+        $user = App\User::find(1);
         $numbers = array(range(1,20));
+        print('===========================================');
         for($i = 1; $i < 20; $i++)
         {
             DB::table('users')->insert([
@@ -35,6 +38,11 @@ class UsersTableSeeder extends Seeder
                 'activation_digest' => 'aaa',
                 'email_verified_at' => Carbon::now(),
             ]);
+            $other_user = App\User::find($i+1);
+            $user->follow($other_user);
+            if ($i < 10) {
+                $other_user->follow($user);
+            }
         }
     }
 }

@@ -39,6 +39,8 @@ Auth::routes(['verify' => true]);
 // for Users controller
 //Route::get('users/{user}', 'UsersController@show');
 //  ->name('signup');
+Route::get('users/{id}/followers', 'UsersController@followers');
+Route::get('users/{id}/following', 'UsersController@following');
 Route::resource('users', 'UsersController')
     ->except(['create', 'store'])
     ->middleware('verified');
@@ -47,7 +49,9 @@ Route::resource('microposts', 'MicropostsController')
     ->only(['store', 'destroy'])
     ->middleware('verified');
 
-
+Route::resource('relationship', 'RelationshipController')
+    ->only(['store', 'destroy'])
+    ->middleware('verified');
 
 
 
