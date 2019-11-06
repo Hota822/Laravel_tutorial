@@ -81,4 +81,23 @@ class User extends Authenticatable implements MustVerifyEmail
             ['followed_id' , $other_user->id],
         ])->delete();
     }
+
+    public function feed()
+    {
+        $user_id = $this->id;        
+        return  $this->hasMany('App\Micropost')
+                     ->where('user_id', $user_id)
+                     ->orWhereIn('user_id',
+                                 function ($query) use ($user_id)
+                                 {
+                                     $query
+                                         ->select('followed_id')
+                                         ->from('relationships')
+                                         ->where('follower_id', $user_id);
+                                 })
+                     ->orderByDesc('updated_at');
+
+
+    }
+    
 }

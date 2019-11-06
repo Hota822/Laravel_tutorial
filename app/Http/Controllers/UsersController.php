@@ -16,7 +16,8 @@ class UsersController extends Controller
     {
         //same as belog sentence: $users = \DB::table('users')->paginate(5);
         $users = User::paginate(5);
-        return view('users/index', ['users' => $users]);
+        $admin = \Auth::user()->admin;
+        return view('users/index', ['users' => $users, 'admin' => $admin]);
     }
 
     /**
@@ -102,17 +103,21 @@ class UsersController extends Controller
             ->with('success', 'user was successfly deleted');
     }
 
-    public function followers(User $user, $id )
+    public function followers($id)
     {
         $title = 'Followers';
+        $user = User::find($id);
         $users = $user->followers()->paginate(5);
-        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $id]);
+        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $user->id]);
     }
 
-    public function following(User $user, $id)
+    public function following($id)
     {
         $title = 'Following';
+        $user = User::find($id);
         $users = $user->following()->paginate(5);
-        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $id]);        
+        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $user->id]);
     }
+
+
 }

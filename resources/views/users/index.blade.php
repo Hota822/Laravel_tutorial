@@ -14,13 +14,15 @@ $title = 'All users';
 		    Name: {{ link_to("users/{$user->id}", $user->name) }}</br>
 		    Email: {{ $user->email }}<br>
 		</div>
-		<form action="{{ url("users/{$user->id}") }}" method="POST" class="inline_block" >
-		    @method('DELETE')
-		    @csrf
-		    <button type="submit" class="btn btn-primary">
-                        {{ 'delete user' }}
-		    </button>
-		</form>
+		@if ($admin)
+		    <form action="{{ url("users/{$user->id}") }}" method="POST" class="inline_block" >
+			@method('DELETE')
+			@csrf
+			<button type="submit" class="btn btn-primary">
+                            {{ 'delete user' }}
+			</button>
+		    </form>
+		@endif 
 	    </li>
 	    <br>
 	@endforeach

@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         App\User::truncate();
-        DB::table('relationship')->delete();
+        DB::table('relationships')->delete();
         DB::table('users')->insert([
                 'name' =>  'adminuser',
                 'email' => 'admin@example.com',
@@ -23,6 +23,7 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => Carbon::now(),
                 'activation_digest' => 'aaa',
                 'email_verified_at' => Carbon::now(),
+                'admin' => true,
         ]);
         $user = App\User::find(1);
         $numbers = array(range(1,20));

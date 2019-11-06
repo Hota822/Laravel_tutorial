@@ -37,7 +37,7 @@
 	
 	@include('layouts/footer')
 	<!-- カスタムJSの読み込み -->
-	<script src="{{ asset('/js/custom.js') }}"></script>
+	<script src="{{ asset('/js/app.js') }}"></script>
 
 	<!-- Bootstrap3-js（CDN） -->
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

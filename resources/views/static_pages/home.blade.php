@@ -9,7 +9,8 @@ $user = Auth::user();
 @section('content')
     @auth
     @php
-    $microposts = $user->microposts()->paginate(5);
+    $microposts = $user->feed()->paginate(5);    
+    
     @endphp
     <div class="row">
 	<aside class="col-md-4">
@@ -61,16 +62,10 @@ $user = Auth::user();
 			    Posted at {{ $micropost->created_at }}
 			</span>
 			<div> 
-			<form action="{{ url("microposts/{$micropost->id}") }}" method="POST" class="inline_block" >
-			    @method('DELETE')
-			    @csrf
-			    <button type="submit" class="btn btn-primary">
-				delete
-			    </button>
-			</form>
 			</div>
 		    </li>
-		@endforeach
+		 @endforeach
+		 {{ $microposts->links() }}
 	    </ol>
 	    
 	    <!-- <% end %> -->

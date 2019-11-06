@@ -42,21 +42,17 @@ $title = $user->name;
 	    @if ($user->id != $auth_user->id)
 	    <div id="follow_form">
 		@if ($auth_user->alreadyFollowed($user))
-		    <form id="follow_content" method="POST" action="{{ url("relationship/{$user->id}") }}">
+		    <form method="POST" action="{{ url("relationship/{$user->id}") }}">
 			@csrf
 			@method('DELETE')
 			<input id="followed_id" type="hidden" name="followed_id" value="{{ $user->id }}">
-			<input id="follower_id" type="hidden" name="follower_id" value="{{ $auth_user->id }}">			
-			<!-- <input  type="submit" class="btn" value="unfollow"> -->
-			<button id="follow_button" type="button" class="btn" >unfollow</button>			
+			<input type="submit" class="btn" value="unfollow">
 		    </form>
 		@else
-		    <form id="follow_content" method="POST" action="{{ url('relationship') }}">
+		    <form method="POST" action="{{ url('relationship/') }}">
 			@csrf
 			<input id="followed_id" type="hidden" name="followed_id" value="{{ $user->id }}">
-			<input id="follower_id" type="hidden" name="follower_id" value="{{ $auth_user->id }}">
-			<!-- <input type="submit" class="btn btn-primary" value="follow"> -->
-			<button id="follow_button" type="button" class="btn btn-primary">follow</button>
+			<input type="submit" class="btn btn-primary" value="follow">
 		    </form>
 		@endif
 	    </div>

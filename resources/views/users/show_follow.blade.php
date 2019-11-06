@@ -33,7 +33,6 @@
 	</aside>
 	<div class="col-md-8">
 	    <h3>{{ $title }}</h3>
-	    <% if @users.any? %>
 	    <ul class="users follow">
 		@foreach($users as $other_user)
 		    <li>
@@ -48,7 +47,7 @@
 		    <br>
 		@endforeach
 	    </ul>
-	    <%= will_paginate %>
+	    {{ $users->links() }}
 	</div>
     </div>
 @endsection
