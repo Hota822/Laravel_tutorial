@@ -1,9 +1,10 @@
-<!DOCTYPE html>
-<html>
-    <head>
-	<title>Help | Ruby on Rails Tutorial Sample App</title>
-    </head>
-    <body>
+@extends('layouts.application')
+
+@php
+$title = 'Help'
+@endphp
+
+@section('content')
 	<h1>Help</h1>
 	<p>  Get help on the Ruby on Rails Tutorial at the
 	    <a href="https://railstutorial.jp/help">Rails Tutorial help
@@ -12,5 +13,4 @@
 	    <a href="https://railstutorial.jp/#ebook">
 		<em>Ruby on Rails Tutorial</em> book</a>.
 	</p>
-    </body>
-    </html>
+@endsection

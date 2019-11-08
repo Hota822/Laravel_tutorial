@@ -41,7 +41,9 @@ class MicropostsController extends Controller
         $micropost->user_id = \Auth::user()->id;
         $micropost->save();
         
-        return redirect('/');
+        return redirect('/')
+            ->withInput()
+            ->with('success', 'Micropos created!');
                    
     }
 

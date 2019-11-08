@@ -1,9 +1,4 @@
 <!DOCTYPE html>
-@auth
-    @php
-    $id = Auth::user()->id;
-    @endphp
-@endauth
 <html>
     <head>
 	<title>{{ Helper::fullTitle($title) }}</title>
@@ -26,16 +21,15 @@
 
     <body>
 	@include('layouts/header')
-	@include('common/errors')
-	@include('common/success')
 	<div class="container">
+	    @include('shared/flash')	    
 	    @yield('content')
+	    @include('layouts/footer')
 	</div>
 
 	<!-- Jquery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
-	@include('layouts/footer')
 	<!-- カスタムJSの読み込み -->
 	<script src="{{ asset('/js/app.js') }}"></script>
 

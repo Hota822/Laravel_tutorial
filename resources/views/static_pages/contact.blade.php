@@ -5,11 +5,10 @@ $title = 'Contact';
 @extends('layouts/application')
 
 @section('content')
-    <h1>Sample App</h1>
+    <h1>Contact</h1>
     <p>
-	This is the contact page for the
-	<a href="https://railstutorial.jp/">Ruby on Rails Tutorial</a>
-	sample application.
+	Contact the Ruby on Rails Tutorial about the sample app at the
+	<a href="http://www.railstutorial.org/contact">contact page</a>.
     </p>
 @endsection
 

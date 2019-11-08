@@ -5,27 +5,12 @@ $title = 'All users';
 @extends('layouts.application')
 
 @section('content')
+    <h1>All users</h1>
+    
+    {{ $users->links() }}    
     <ul class="users">
-	@foreach($users as $user)
-	    <li>
-		{{ Helper::gravatar_for($user) }}
-		<div class="inline_block">
-		    Id: {{ $user->id }}<br>
-		    Name: {{ link_to("users/{$user->id}", $user->name) }}</br>
-		    Email: {{ $user->email }}<br>
-		</div>
-		@if ($admin)
-		    <form action="{{ url("users/{$user->id}") }}" method="POST" class="inline_block" >
-			@method('DELETE')
-			@csrf
-			<button type="submit" class="btn btn-primary">
-                            {{ 'delete user' }}
-			</button>
-		    </form>
-		@endif 
-	    </li>
-	    <br>
-	@endforeach
-	{{ $users->links() }}
+	@include('users.user')
     </ul>
+    {{ $users->links() }}
+    
 @endsection

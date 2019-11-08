@@ -1,6 +1,10 @@
-@if (count($errors) > 0)
+@php
+$count = count($errors)
+@endphp
+
+@if ($count > 0)
     <div class="alert alert-danger">
-	<strong>エラーじゃあ</strong>
+	<strong>The form contains {{ $count }} {{ Str::plural('error', $count) }}</strong>
 	<br><br>
 	<ul>
 	    @foreach ($errors->all() as $error)

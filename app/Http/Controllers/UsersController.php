@@ -16,8 +16,8 @@ class UsersController extends Controller
     {
         //same as belog sentence: $users = \DB::table('users')->paginate(5);
         $users = User::paginate(5);
-        $admin = \Auth::user()->admin;
-        return view('users/index', ['users' => $users, 'admin' => $admin]);
+        $admin = Auth::user();
+        return view('users/index', ['users' => $users, 'admin' => $admin, 'myself' => $myself]);
     }
 
     /**
@@ -50,7 +50,8 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $microposts = $user->microposts()->paginate(10);
+        $microposts = $user->microposts();
+
         return view('users/show', ['user' => $user, 'microposts' => $microposts]);
 
     }
@@ -107,16 +108,27 @@ class UsersController extends Controller
     {
         $title = 'Followers';
         $user = User::find($id);
-        $users = $user->followers()->paginate(5);
-        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $user->id]);
+        $users = $user->followers();
+        $admin = \Auth::user();
+        return view('users.show_follow', ['user' => $user,
+                                          'users' => $users,
+                                          'title' => $title,
+                                          'id' => $user->id,
+                                          'admin' => $admin,]);
+
     }
 
     public function following($id)
     {
         $title = 'Following';
         $user = User::find($id);
-        $users = $user->following()->paginate(5);
-        return view('users.show_follow', ['user' => $user, 'users' => $users, 'title' => $title, 'id' => $user->id]);
+        $users = $user->following();
+        $admin = \Auth::user();        
+        return view('users.show_follow', ['user' => $user,
+                                          'users' => $users,
+                                          'title' => $title,
+                                          'id' => $user->id,
+                                          'admin' => $admin,]);
     }
 
 
