@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Micropost;
 use Illuminate\Http\Request;
+use App\Http\Requests\MicropostsRequest;
 
 class MicropostsController extends Controller
 {
@@ -33,14 +34,21 @@ class MicropostsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MicropostsRequest $request)
     {
-
-        $micropost = new Micropost;
-        $micropost->content = $request->input('textarea');
-        $micropost->user_id = \Auth::user()->id;
-        $micropost->save();
+        self::createMicropost($request);
+        // $micropost = new Micropost;
+        // $micropost->content = $request->input('content');
+        // $micropost->user_id = \Auth::user()->id;
+        // $name = $request->picture->getClientOriginalName();
+        // $micropost->picture = $name;
+        // $micropost->save();
         
+        // $request->picture = Image::make($request->picture)
+        //        ->resize(300, null, function ($constraint) {
+        //            $constraint->aspectRatio();
+        //        });
+        // $request->picture->storeAs('public/images', $micropost->id.'_'.$name);        
         return redirect('/')
             ->withInput()
             ->with('success', 'Micropos created!');
@@ -92,4 +100,49 @@ class MicropostsController extends Controller
         $micropost->delete();
         return redirect('/');
     }
+
+    private function createMicropost($request)
+    {
+
+        $micropost = new Micropost;
+        $micropost->content = $request->input('content');
+        $micropost->user_id = \Auth::user()->id;
+        $picture = $request->picture;
+        if (!empty($picture)) {
+            $name = $request->picture->getClientOriginalName();
+        } else {
+            $name = '';
+        }
+        $micropost->picture = $name;
+        $micropost->save();
+        
+        if (!empty($picture)) {
+            self::storeImage($request->picture, $micropost->id, $name);
+        }
+    }
+
+    private function storeImage($picture, $id, $name )
+    {
+        
+        $width = getimagesize($picture);
+        if ($width[0] > $width[1]) {
+            dd($width[0]);            
+            $param = [ 400, null, function ($constraint) {
+                   $constraint->aspectRatio();
+               }];
+
+        } else {
+            $param = [ null, 400, function ($constraint) {
+                   $constraint->aspectRatio();
+               }];
+        }
+        if ($width[0] > 400 || $width[1] > 400) {
+            $picture = \Image::make($picture)
+               ->resize(...$param);
+            $picture->save('../storage/app/public/images/'.$id.'_'.$name);
+        } else {
+            $picture->storeAs('public/images', $id.'_'.$name);
+        }
+    }
 }
+

@@ -4,7 +4,12 @@
 	<a href="{{ url('users/'.$user->id) }}">
 	    <span class="user">{{ $micropost->user->name }}</span>
 	</a>
-	<span class="content">{{ $micropost->content }}</span>
+	<span class="content">
+	    {{ $micropost->content }}
+	    @if (!empty($micropost->picture))
+		<img src="/storage/images/{{ $micropost->id }}_{{ $micropost->picture }}">
+	    @endif
+	</span>
 	<span class="timestamp">
 	    Posted {{ Helper::timeAgoInWords($micropost->created_at) }}
 	    {{-- $micropost->created_at --}}

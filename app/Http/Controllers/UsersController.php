@@ -15,9 +15,9 @@ class UsersController extends Controller
     public function index()
     {
         //same as belog sentence: $users = \DB::table('users')->paginate(5);
-        $users = User::paginate(5);
-        $admin = Auth::user();
-        return view('users/index', ['users' => $users, 'admin' => $admin, 'myself' => $myself]);
+        $users = User::paginate(30);
+        $admin = \Auth::user();
+        return view('users/index', ['users' => $users, 'admin' => $admin]);
     }
 
     /**

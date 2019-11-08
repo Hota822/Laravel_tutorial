@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
         $user = App\User::find(1);
         $numbers = array(range(1,20));
         print('===========================================');
-        for($i = 1; $i < 20; $i++)
+        for($i = 1; $i < 50; $i++)
         {
             DB::table('users')->insert([
                 'name' =>  'testuser'.$i,
