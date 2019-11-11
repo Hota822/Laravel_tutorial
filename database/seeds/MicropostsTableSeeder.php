@@ -18,14 +18,16 @@ class MicropostsTableSeeder extends Seeder
             DB::table('microposts')->insert([
                 'content' =>  'test'.$i,
                 'user_id' => 1,
-                'created_at' => $date->addHour($i),
-                'updated_at' => $date->addHour($i),
+                'created_at' => $date->addHour(-$i),
+                'updated_at' => $date->addHour(-$i),
+                'picture' => '',                
             ]);
             DB::table('microposts')->insert([
                 'content' => 'feed'.$i,
                 'user_id' => $i,
-                'created_at' => $date->addHour($i),
-                'updated_at' => $date->addHour($i),
+                'created_at' => $date->addHour(-$i),
+                'updated_at' => $date->addHour(-$i),
+                'picture' => '',
             ]);
             
         }

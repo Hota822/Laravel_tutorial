@@ -75,14 +75,21 @@ class UsersController extends Controller
      * @param  \Int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user_param, $user)
+    public function update(Request $request,User $user)
     {
-        $user_id = $request->route()->parameter('user');
+        //$user_id = $request->route()->parameter('user')->id;
+        $val = $request->validate([
+            'name' => ['required', 'max:50'],
+            'email' => ['required', 'email', 'max:255', "unique:users,email,{$user->id}" ],
+            'password' => ["same:password_confirmation"]
+        ]);
+                                   
         $user->name = $request->name;
         $user->email = $request->email;
+        $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->action('UsersController@show',
-        ['user' => $user_id])
+        ['user' => $user->id])
                          ->withInput()
                          ->with('success', 'successfly updated');
     }
