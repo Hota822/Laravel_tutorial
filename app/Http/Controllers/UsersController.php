@@ -50,10 +50,17 @@ class UsersController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-        $microposts = $user->microposts();
-
-        return view('users/show', ['user' => $user, 'microposts' => $microposts]);
-
+        if (is_null($user)) {
+            return redirect('/');
+        } else {
+            $microposts = $user->microposts();
+            $count = $microposts->count();
+            $microposts = $microposts->paginate(30);
+ 
+        }
+        return view('users/show', ['user' => $user,
+                                   'microposts' => $microposts,
+                                   'count' => $count]);
     }
 
     /**
@@ -102,9 +109,8 @@ class UsersController extends Controller
      */
     public function destroy(User $user)
     {
-        
+        $user->microposts()->delete();
         $user->delete();
-
         // if delete myself, redirect to login page
         return redirect('users')
             ->withInput()

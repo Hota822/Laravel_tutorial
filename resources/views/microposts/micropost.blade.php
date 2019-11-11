@@ -14,16 +14,7 @@
 	    Posted {{ Helper::timeAgoInWords($micropost->created_at) }}
 	    {{-- $micropost->created_at --}}
 	    @if ($micropost->user_id == $auth_user->id)
-   		<a href="{{ url("microposts/{$micropost->id}") }}"
-		   onclick="event.preventDefault();
-                        document.getElementById('delete_micropost').submit();"
-		   data-confirm="You sure?">
-		    {{ __('delete') }}
-		</a>
-		<form id="delete_micropost" class="delete_link" action="{{ url("microposts/{$micropost->id}") }}" method="POST">
-		    @csrf
-		    @method('DELETE')
-		</form>
+		@include('shared.delete_link', ['to' => 'micropost', 'to_id' => $micropost->id])
 	    @endif
 	</span>
     </li>

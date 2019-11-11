@@ -6,8 +6,7 @@ $auth_user = Auth::user();
 if (is_null($user)) {
     $user = $auth_user;
 }
-$count = $microposts->count();
-$microposts = $microposts->paginate(30);
+
 $title = $user->name;
 
 @endphp

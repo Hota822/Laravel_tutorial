@@ -1,5 +1,7 @@
-
-document.getElementById('follow_button').addEventListener('click', executeFollowButton);
+var elements = document.getElementsByName('follow_button');
+elements.forEach(function(elm) {
+    elm.addEventListener('click', executeFollowButton);
+});
 
 function executeFollowButton() {
     console.log('Enter executeFollowbutton');
@@ -13,15 +15,17 @@ function executeFollowButton() {
     console.log('value:', value);
     if (value == 'follow') {
 	var method = 'POST';
-	var classValue = 'btn';
-	var operator = 1
+	var operator = 1;
+	var followClass = 'hide';
+	var unfollowClass = '';
 	value = 'unfollow';
     } else {
 	var method = 'DELETE';
-	var classValue ='btn btn-primary';
-	var operator = -1
-	value = 'follow'
-	targetUrl += followedId
+	var operator = -1;
+	var followClass = '';
+	var unfollowClass = 'hide';	
+	value = 'follow';
+	targetUrl += followedId;
     }
     console.log('method:', method);
     //var tar = document.getElementById('api');
@@ -30,20 +34,14 @@ function executeFollowButton() {
     xhr.onreadystatechange = function(){
 	if (xhr.readyState === 4 && xhr.status === 200) {
 	    console.log('Enter on ready state change');
-	    var string ='<form id="follow_content" method="' + method + '" action="' + targetUrl + '">';
-	    string += '<input type="hidden" name="_token"';
-	    string += 'value="' + token + '">';
-	    string += '<input id="followed_id" type="hidden" name="followed_id"';
-	    string += 'value="' + followedId + '">';
-	    string += '<input id="follower_id" type="hidden" name="follower_id"';
-	    string += 'value="' + followerId + '">';
-	    string += '<button id="follow_button" type="button" class="' + classValue + '">' + value + '</button>'
-	    $('#follow_content').html(string)
-	    document.getElementById('follow_button').addEventListener('click', executeFollowButton);
-	    
-	    var element = document.getElementById('followers')
-	    console.log(element.innerText)
-	    element.innerText = parseInt(element.innerText) + operator
+
+	    console.log('unfollow', unfollowClass);
+	    document.getElementById('follow_content').className = followClass;
+	    document.getElementById('unfollow_content').className = unfollowClass;
+
+	    var element = document.getElementById('followers');
+	    console.log(element.innerText);
+	    element.innerText = parseInt(element.innerText) + operator;
 	    //var target = document.getElementById('api');
 	    //target.innerText = JSON.parse(xhr.responseText);
 	}

@@ -37,21 +37,25 @@ class Helper
     {
         $time = Carbon::parse($time);
         $diff = $time->diffInSeconds(Carbon::now());
+        $about = '';
         switch (true) {
         case $diff < 60:
-            $unit = 'Second';
-            break;
-        case $diff < 3600:
+            //$unit = 'Second';
+            return 'less than a minute ago.';
+        case $diff < 2700:
             $unit = 'Minute';
             break;
+        case $diff < 3600:
+            return 'about 1 hour ago.';
         case $diff < 3600 * 24:
             $unit = 'Hour';
+        $about = 'about ';
             break;
         default:
             $unit = 'Day';
         }
         $func = "diffIn".\Str::plural($unit);
         $diff = $time->$func(Carbon::now());
-        return "{$diff} ".\Str::plural(mb_strtolower($unit), $diff)." ago.";
+        return "{$about}{$diff} ".\Str::plural(mb_strtolower($unit), $diff)." ago.";
     }
 }

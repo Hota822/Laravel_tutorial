@@ -30,6 +30,7 @@ class RelationshipController extends Controller
 
     public function destroy(Request $request, $id)
     {
+        //detach
         \DB::table('relationships')->where([
             ['follower_id', $request->user()->id],
             ['followed_id', $id],
