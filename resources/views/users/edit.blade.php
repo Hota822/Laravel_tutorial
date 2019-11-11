@@ -70,7 +70,7 @@ $user = Auth::user();
                 </div>
             </form>
 	    <div class="gravatar_edit">
-		{{ Helper::gravatar_for($user) }}
+		{{ Helper::gravatarFor($user) }}
 		<a href="http://gravatar.com/emails" target="_blank">change</a>
 	    </div>
 	    

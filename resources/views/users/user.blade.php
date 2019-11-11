@@ -1,6 +1,6 @@
 @foreach($users as $user)
     <li>
-	{!! HTML::decode(link_to(url('users/'.$user->id),  Helper::gravatar_for($user, 50))) !!}
+	{!! HTML::decode(link_to(url('users/'.$user->id),  Helper::gravatarFor($user, 50))) !!}
 	{{ link_to("users/{$user->id}", $user->name) }}
 	@if ($admin->admin && $user->id != $admin->id)
 	    |

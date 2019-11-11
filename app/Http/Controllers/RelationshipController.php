@@ -14,18 +14,14 @@ class RelationshipController extends Controller
         $relation->followed_id = $request->input('followed_id');
         echo "\n============================\n";
         echo $request;
-         
         echo "\n============================\n";
         $relation->save();
-
-        
 
         // $relation = new \App\Relationship;
         // $relation->follower_id = $request->user()->id;
         // $relation->followed_id = $request->input('followed_id');
         // $relation->save();
         //return redirect('/');
-
     }
 
     public function destroy(Request $request, $id)
@@ -41,7 +37,6 @@ class RelationshipController extends Controller
         //     ['follower_id', $request->user()->id],
         //     ['followed_id', $request->input('followed_id')],
         // ])->delete();
-        //return redirect('/');                
+        //return redirect('/');
     }
-    
 }

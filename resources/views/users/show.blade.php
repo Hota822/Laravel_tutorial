@@ -16,7 +16,7 @@ $title = $user->name;
 	<aside class="col-md-4">
 	    <section class="user_info">
 		<h1>
-		    {{ Helper::gravatar_for($user) }}
+		    {{ Helper::gravatarFor($user) }}
 		    {{ $user->name }}<br>
 		</h1>
 	    </section>

@@ -43,7 +43,6 @@ class MicropostsController extends Controller
         // $name = $request->picture->getClientOriginalName();
         // $micropost->picture = $name;
         // $micropost->save();
-        
         // $request->picture = Image::make($request->picture)
         //        ->resize(300, null, function ($constraint) {
         //            $constraint->aspectRatio();
@@ -52,7 +51,6 @@ class MicropostsController extends Controller
         return redirect('/')
             ->withInput()
             ->with('success', 'Micropos created!');
-                   
     }
 
     /**

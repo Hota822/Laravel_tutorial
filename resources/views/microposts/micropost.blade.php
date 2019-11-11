@@ -1,6 +1,6 @@
 @foreach($microposts as $micropost)
     <li id="micropost-{{ $micropost->id }}">
-	{!! HTML::decode(link_to(url('users/'.$user->id),  Helper::gravatar_for($micropost->user, 50))) !!}
+	{!! HTML::decode(link_to(url('users/'.$user->id),  Helper::gravatarFor($micropost->user, 50))) !!}
 	<a href="{{ url('users/'.$user->id) }}">
 	    <span class="user">{{ $micropost->user->name }}</span>
 	</a>
