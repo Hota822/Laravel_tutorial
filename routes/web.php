@@ -52,7 +52,3 @@ Route::resource('microposts', 'MicropostsController')
 Route::resource('relationship', 'RelationshipController')
     ->only(['store', 'destroy'])
     ->middleware('verified');
-
-
-
-

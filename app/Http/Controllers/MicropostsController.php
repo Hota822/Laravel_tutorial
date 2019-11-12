@@ -47,7 +47,7 @@ class MicropostsController extends Controller
         //        ->resize(300, null, function ($constraint) {
         //            $constraint->aspectRatio();
         //        });
-        // $request->picture->storeAs('public/images', $micropost->id.'_'.$name);        
+        // $request->picture->storeAs('public/images', $micropost->id.'_'.$name);
         return redirect('/')
             ->withInput()
             ->with('success', 'Micropos created!');
@@ -113,34 +113,31 @@ class MicropostsController extends Controller
         }
         $micropost->picture = $name;
         $micropost->save();
-        
+
         if (!empty($picture)) {
             self::storeImage($request->picture, $micropost->id, $name);
         }
     }
 
-    private function storeImage($picture, $id, $name )
+    private function storeImage($picture, $id, $name)
     {
-        
+
         $width = getimagesize($picture);
         if ($width[0] > $width[1]) {
-            dd($width[0]);            
             $param = [ 400, null, function ($constraint) {
-                   $constraint->aspectRatio();
-               }];
-
+                $constraint->aspectRatio();
+            }];
         } else {
             $param = [ null, 400, function ($constraint) {
-                   $constraint->aspectRatio();
-               }];
+                $constraint->aspectRatio();
+            }];
         }
         if ($width[0] > 400 || $width[1] > 400) {
             $picture = \Image::make($picture)
-               ->resize(...$param);
+                     ->resize(...$param);
             $picture->save('../storage/app/public/images/'.$id.'_'.$name);
         } else {
             $picture->storeAs('public/images', $id.'_'.$name);
         }
     }
 }
-

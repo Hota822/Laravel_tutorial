@@ -89,7 +89,7 @@ class UsersController extends Controller
             'email' => ['required', 'email', 'max:255', "unique:users,email,{$user->id}" ],
             'password' => ["same:password_confirmation"]
         ]);
-                                   
+
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -117,30 +117,26 @@ class UsersController extends Controller
 
     public function followers($id)
     {
-        $title = 'Followers';
-        $user = User::find($id);
-        $users = $user->followers();
-        $admin = \Auth::user();
-        return view('users.show_follow', ['user' => $user,
-                                          'users' => $users,
-                                          'title' => $title,
-                                          'id' => $user->id,
-                                          'admin' => $admin,]);
-
+        $title = 'followers';
+        makeRelation($title, $id)
     }
 
     public function following($id)
     {
-        $title = 'Following';
+        $title = 'following';
+        makeRelation($title, $id)
+    }
+
+    private function makeRelation($title, $id)
+    {
         $user = User::find($id);
-        $users = $user->following();
-        $admin = \Auth::user();        
-        return view('users.show_follow', ['user' => $user,
+        $users = $user->$title();
+        $title = ucfirst($title);
+        $admin = \Auth::user();
+                return view('users.show_follow', ['user' => $user,
                                           'users' => $users,
                                           'title' => $title,
                                           'id' => $user->id,
                                           'admin' => $admin,]);
     }
-
-
 }

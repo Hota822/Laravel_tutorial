@@ -52,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function followers()
     {
-        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');        
+        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');
     }
 
     public function following()
@@ -83,20 +83,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function feed()
     {
-        $user_id = $this->id;        
+        $user_id = $this->id;
         return  $this->hasMany('App\Micropost')
                      ->where('user_id', $user_id)
-                     ->orWhereIn('user_id',
-                                 function ($query) use ($user_id)
-                                 {
-                                     $query
-                                         ->select('followed_id')
-                                         ->from('relationships')
-                                         ->where('follower_id', $user_id);
-                                 })
+                     ->orWhereIn(
+                         'user_id',
+                         function ($query) use ($user_id) {
+                             $query->select('followed_id')
+                                   ->from('relationships')
+                                   ->where('follower_id', $user_id);
+                         }
+                     )
                      ->orderByDesc('updated_at');
-
-
     }
-    
 }
