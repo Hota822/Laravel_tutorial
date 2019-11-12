@@ -88,11 +88,11 @@ class User extends Authenticatable implements MustVerifyEmail
                      ->where('user_id', $userId)
                      ->orWhereIn(
                          'user_id',
-                             function ($query) use ($userId) {
-                                 $query->select('followed_id')
-                                       ->from('relationships')
-                                       ->where('follower_id', $userId);
-                             }
+                         function ($query) use ($userId) {
+                             $query->select('followed_id')
+                                   ->from('relationships')
+                                   ->where('follower_id', $userId);
+                         }
                      )
                      ->orderByDesc('updated_at');
     }

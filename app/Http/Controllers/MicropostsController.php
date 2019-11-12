@@ -13,20 +13,20 @@ class MicropostsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        return view('microposts.get');
-    }
+    // public function index()
+    // {
+    //     return view('microposts.get');
+    // }
 
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -59,10 +59,10 @@ class MicropostsController extends Controller
      * @param  \App\Micropost  $micropost
      * @return \Illuminate\Http\Response
      */
-    public function show(Micropost $micropost)
-    {
-        //
-    }
+    // public function show(Micropost $micropost)
+    // {
+    //     //
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -70,10 +70,10 @@ class MicropostsController extends Controller
      * @param  \App\Micropost  $micropost
      * @return \Illuminate\Http\Response
      */
-    public function edit(Micropost $micropost)
-    {
-        //
-    }
+    // public function edit(Micropost $micropost)
+    // {
+    //     //
+    // }
 
     /**
      * Update the specified resource in storage.
@@ -82,10 +82,10 @@ class MicropostsController extends Controller
      * @param  \App\Micropost  $micropost
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Micropost $micropost)
-    {
-        //
-    }
+    // public function update(Request $request, Micropost $micropost)
+    // {
+    //     //
+    // }
 
     /**
      * Remove the specified resource from storage.

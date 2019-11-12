@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Relatonship;
+use App\Relationship;
 
 class RelationshipController extends Controller
 {
     public function store(Request $request)
     {
         // for ajax
-        $relation = new \App\Relationship;
+        $relation = new Relationship;
         $relation->follower_id = $request->user()->id;
         $relation->followed_id = $request->input('followed_id');
         echo "\n============================\n";

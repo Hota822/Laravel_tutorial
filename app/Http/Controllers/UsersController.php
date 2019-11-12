@@ -52,11 +52,10 @@ class UsersController extends Controller
         $user = User::find($id);
         if (is_null($user)) {
             return redirect('/');
-        } else {
-            $microposts = $user->microposts();
-            $count = $microposts->count();
-            $microposts = $microposts->paginate(30);
         }
+        $microposts = $user->microposts();
+        $count = $microposts->count();
+        $microposts = $microposts->paginate(30);
         return view('users/show', ['user' => $user,
                                    'microposts' => $microposts,
                                    'count' => $count]);
