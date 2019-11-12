@@ -52,17 +52,17 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function followers()
     {
-        return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
+        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');        
     }
 
     public function following()
     {
-        return $this->belongsToMany('App\User', 'relationships', 'followed_id', 'follower_id');
+        return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
     }
 
     public function alreadyFollowed($other_user)
     {
-        return !empty($this->followers->where('id', $other_user->id)->count());
+        return !empty($this->following->where('id', $other_user->id)->count());
     }
 
     public function follow($other_user)

@@ -4,7 +4,8 @@
 $auth_user = Auth::user();
 
 if (is_null($user)) {
-    $user = $auth_user;
+$user = $auth_user;
+dump('null user');
 }
 
 $title = $user->name;

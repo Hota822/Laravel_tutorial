@@ -56,7 +56,6 @@ class UsersController extends Controller
             $microposts = $user->microposts();
             $count = $microposts->count();
             $microposts = $microposts->paginate(30);
- 
         }
         return view('users/show', ['user' => $user,
                                    'microposts' => $microposts,
@@ -95,8 +94,7 @@ class UsersController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
-        return redirect()->action('UsersController@show',
-        ['user' => $user->id])
+        return redirect()->action('UsersController@show', ['user' => $user->id])
                          ->withInput()
                          ->with('success', 'successfly updated');
     }
