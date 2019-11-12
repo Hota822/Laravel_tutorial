@@ -17,19 +17,17 @@ class Helper
 
     public static function gravatarFor($user, $size = 80)
     {
-        $gravatar_id = $user->email;
-        $gravatar_url = "https://secure.gravatar.com/avatar/{$gravatar_id}?s={$size}";
-        return \HTML::image($gravatar_url, $user->name, ['class' => 'gravatar']);
+        $gravatarId = $user->email;
+        $gravatarUrl = "https://secure.gravatar.com/avatar/{$gravatarId}?s={$size}";
+        return \HTML::image($gravatarUrl, $user->name, ['class' => 'gravatar']);
     }
 
     public static function hasVerified($user)
     {
         if (is_null($user)) {
-            $auth = false;
-        } else {
-            $auth = !is_null($user->email_verified_at);
+            return false;
         }
-        return $auth;
+        return  !is_null($user->email_verified_at);
     }
 
     public static function timeAgoInWords($time)

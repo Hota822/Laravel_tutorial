@@ -106,10 +106,9 @@ class MicropostsController extends Controller
         $micropost->content = $request->input('content');
         $micropost->user_id = \Auth::user()->id;
         $picture = $request->picture;
+        $name = '';
         if (!empty($picture)) {
             $name = $request->picture->getClientOriginalName();
-        } else {
-            $name = '';
         }
         $micropost->picture = $name;
         $micropost->save();
@@ -121,7 +120,6 @@ class MicropostsController extends Controller
 
     private function storeImage($picture, $id, $name)
     {
-
         $width = getimagesize($picture);
         if ($width[0] > $width[1]) {
             $param = [ 400, null, function ($constraint) {
@@ -136,8 +134,8 @@ class MicropostsController extends Controller
             $picture = \Image::make($picture)
                      ->resize(...$param);
             $picture->save('../storage/app/public/images/'.$id.'_'.$name);
-        } else {
-            $picture->storeAs('public/images', $id.'_'.$name);
+            return;
         }
+        $picture->storeAs('public/images', $id.'_'.$name);
     }
 }

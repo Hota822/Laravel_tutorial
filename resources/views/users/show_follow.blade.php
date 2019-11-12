@@ -1,6 +1,3 @@
-@php
-@endphp
-
 @extends('layouts.application')
 
 @section('content')
@@ -23,7 +20,7 @@
 			@endforeach
 		    </div>
 		@endif
-	    </section>	    
+	    </section>
 	</aside>
 	<div class="col-md-8">
 	    <h3>{{ $title }}</h3>
@@ -34,7 +31,7 @@
 		<ul class="users follow">
 		    @include('users.user')
 		</ul>
-		{{ $users->links() }}		    
+		{{ $users->links() }}
 	    @endif
 	</div>
     </div>

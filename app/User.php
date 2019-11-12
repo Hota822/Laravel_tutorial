@@ -60,39 +60,39 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany('App\User', 'relationships', 'follower_id', 'followed_id');
     }
 
-    public function alreadyFollowed($other_user)
+    public function alreadyFollowed($otherUser)
     {
-        return !empty($this->following->where('id', $other_user->id)->count());
+        return !empty($this->following->where('id', $otherUser->id)->count());
     }
 
-    public function follow($other_user)
+    public function follow($otherUser)
     {
         \DB::table('relationships')->insert([
             'follower_id' => $this->id,
-            'followed_id' => $other_user->id,
+            'followed_id' => $otherUser->id,
         ]);
     }
 
-    public function unfollow($other_user)
+    public function unfollow($otherUser)
     {
         \DB::table('relationships')->where([
             ['follower_id' , $this->id],
-            ['followed_id' , $other_user->id],
+            ['followed_id' , $otherUser->id],
         ])->delete();
     }
 
     public function feed()
     {
-        $user_id = $this->id;
+        $userId = $this->id;
         return  $this->hasMany('App\Micropost')
-                     ->where('user_id', $user_id)
+                     ->where('user_id', $userId)
                      ->orWhereIn(
                          'user_id',
-                         function ($query) use ($user_id) {
-                             $query->select('followed_id')
-                                   ->from('relationships')
-                                   ->where('follower_id', $user_id);
-                         }
+                             function ($query) use ($userId) {
+                                 $query->select('followed_id')
+                                       ->from('relationships')
+                                       ->where('follower_id', $userId);
+                             }
                      )
                      ->orderByDesc('updated_at');
     }

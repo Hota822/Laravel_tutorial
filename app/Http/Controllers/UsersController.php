@@ -81,7 +81,7 @@ class UsersController extends Controller
      * @param  \Int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user)
+    public function update(Request $request, User $user)
     {
         //$user_id = $request->route()->parameter('user')->id;
         $val = $request->validate([
@@ -118,22 +118,22 @@ class UsersController extends Controller
     public function followers($id)
     {
         $title = 'followers';
-        makeRelation($title, $id)
+        return self::makeRelation($title, $id);
     }
 
     public function following($id)
     {
         $title = 'following';
-        makeRelation($title, $id)
+        return self::makeRelation($title, $id);
     }
 
-    private function makeRelation($title, $id)
+    public function makeRelation($title, $id)
     {
         $user = User::find($id);
         $users = $user->$title();
         $title = ucfirst($title);
         $admin = \Auth::user();
-                return view('users.show_follow', ['user' => $user,
+        return view('users.show_follow', ['user' => $user,
                                           'users' => $users,
                                           'title' => $title,
                                           'id' => $user->id,
