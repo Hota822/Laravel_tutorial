@@ -84,16 +84,16 @@ class User extends Authenticatable implements MustVerifyEmail
     public function feed()
     {
         $userId = $this->id;
-        return  $this->hasMany('App\Micropost')
-                     ->where('user_id', $userId)
-                     ->orWhereIn(
-                         'user_id',
-                         function ($query) use ($userId) {
-                             $query->select('followed_id')
-                                   ->from('relationships')
-                                   ->where('follower_id', $userId);
-                         }
-                     )
-                     ->orderByDesc('updated_at');
+        return $this->hasMany('App\Micropost')
+                    ->where('user_id', $userId)
+                    ->orWhereIn(
+                        'user_id',
+                        function ($query) use ($userId) {
+                            $query->select('followed_id')
+                                  ->from('relationships')
+                                  ->where('follower_id', $userId);
+                        }
+                    )
+                    ->orderByDesc('updated_at');
     }
 }

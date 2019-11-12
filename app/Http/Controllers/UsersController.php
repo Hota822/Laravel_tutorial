@@ -67,8 +67,9 @@ class UsersController extends Controller
      * @param  \App\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
+        //revieve $id, and declare parameter in this function
         return view('users/edit');
     }
 
@@ -83,12 +84,11 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //$user_id = $request->route()->parameter('user')->id;
-        $val = $request->validate([
+        $request->validate([
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:255', "unique:users,email,{$user->id}" ],
             'password' => ["same:password_confirmation"]
         ]);
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
