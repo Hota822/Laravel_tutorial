@@ -1,4 +1,5 @@
 @php
+redirect('/');
 $title = 'email verification'
 @endphp
 

@@ -51,7 +51,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         if (is_null($user)) {
-            return redirect('/');
+            $user = \Auth::user();
         }
         $microposts = $user->microposts();
         $count = $microposts->count();
@@ -84,18 +84,18 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         //$user_id = $request->route()->parameter('user')->id;
+        $user->name = $request->name;
+        $user->email = $request->email;
         $request->validate([
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:255', "unique:users,email,{$user->id}" ],
-            'password' => ["same:password_confirmation"]
+            'password' => ['nullable', 'same:password_confirmation', 'min:6']
         ]);
-        $user->name = $request->name;
-        $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->save();
         return redirect()->action('UsersController@show', ['user' => $user->id])
                          ->withInput()
-                         ->with('success', 'successfly updated');
+                         ->with('success', 'Profile updated');
     }
 
     /**

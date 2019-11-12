@@ -3,6 +3,14 @@
 @php
 $title = 'Edit User';
 $user = Auth::user();
+$name = old('name');
+if (empty(old('name'))) {
+$name = $user->name;
+}
+$email = old('email');
+if (empty(old('email'))) {
+$email = $user->email;
+}
 @endphp
 
 @section('content')
@@ -10,6 +18,7 @@ $user = Auth::user();
     <div class="row justify-content-center">
         <div class="col-md-8">
             <h1>Update your profile</h1>
+	    @include('shared.errors')
             <form method="POST" action="{{ route('users.update', ['user' => $user->id]) }}">
 		@method('PATCH')
                 @csrf
@@ -17,13 +26,9 @@ $user = Auth::user();
                     <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                     <div class="col-md-6">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $user->name }}" autocomplete="name" autofocus>
-
-                                   @error('name')
-                                   <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
+			<div class=" @error('name') field_with_errors @enderror ">			
+			    <input id="name" type="text" class="form-control" name="name" value="{{ $name }}" autocomplete="name" autofocus>
+			</div>
                     </div>
                 </div>
 
@@ -31,13 +36,9 @@ $user = Auth::user();
                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Email') }}</label>
 
                     <div class="col-md-6">
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $user->email }}" autocomplete="email">
-
-                                   @error('email')
-                                   <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                                   </span>
-                                   @enderror
+			<div class=" @error('email') field_with_errors @enderror ">			
+			    <input id="email" type="email" class="form-control" name="email" value="{{ $email }}" autocomplete="email">
+			</div>
                     </div>
                 </div>
 
@@ -45,13 +46,9 @@ $user = Auth::user();
                     <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" autocomplete="new-password">
-
-                                   @error('password')
-                                   <span class="alert" role="alert">
-                        <strong>{{ $message }}</strong>
-                                   </span>
-                                   @enderror
+			<div class=" @error('password') field_with_errors @enderror ">			
+			    <input id="password" type="password" class="form-control" name="password" autocomplete="new-password">
+			</div>
                     </div>
                 </div>
 
@@ -59,8 +56,10 @@ $user = Auth::user();
                     <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmation') }}</label>
 
                     <div class="col-md-6">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
-                    </div>
+			<div class=" @error('password') field_with_errors @enderror ">
+				    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" autocomplete="new-password">
+			</div>
+		    </div>
                 </div>
 
                 <div class="form-group row mb-0">
@@ -78,8 +77,4 @@ $user = Auth::user();
         </div>
     </div>
 </div>
-
-
-
-
 @endsection

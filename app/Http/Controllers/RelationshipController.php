@@ -16,7 +16,12 @@ class RelationshipController extends Controller
         echo "\n============================\n";
         echo $request;
         echo "\n============================\n";
-        $relation->save();
+        $dup = \DB::table('relationships')->where('follower_id', $relation->follower_id)
+                                          ->where('followed_id', $relation->follower_id)
+                                          ->get();
+        if (is_null($dup)) {
+            $relation->save();
+        }
 
         // $relation = new \App\Relationship;
         // $relation->follower_id = $request->user()->id;
